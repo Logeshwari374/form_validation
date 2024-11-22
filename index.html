@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Validation</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url(IMG-20240503-WA0007.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+    .container {
+        max-width: 600px;
+        margin: 180px auto;
+        background-image: url(IMG-20240503-WA0007.jpg) ;
+        background-repeat: no-repeat;
+        background-size: 110% 110%;
+        background-attachment: fixed;
+        padding: 20px;
+        border-radius: 90px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-control {
+        margin-bottom: 20px;
+    }
+    .form-control label {
+        display: ruby-base-container ;
+        margin-bottom: 5px;
+    }
+    .form-control input {
+        width: 95%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .form-control .error {
+        color: red;
+        font-size: 12px;
+    }
+    .form-control input.invalid {
+        border-color: red;
+    }
+    .form-control input.valid {
+        border-color: green;
+    }
+    .form-control button {
+        padding: 10px 15px;
+        background-color: mediumpurple;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <center><h2>Form Validation</h2></center>
+    <form id="myForm" onsubmit="validateForm(event)">
+        <div class="form-control">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name">
+            <div id="nameError" class="error"></div>
+        </div>
+        <div class="form-control">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+            <div id="emailError" class="error"></div>
+        </div>
+        <div class="form-control">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+            <div id="passwordError" class="error"></div>
+        </div>
+        <div class="form-control">
+           <center><button type="submit">Submit</button></center>
+        </div>
+    </form>
+</div>
+
+<script>
+    function validateForm(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('name');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        
+        const nameValue = name.value.trim();
+        const emailValue = email.value.trim();
+        const passwordValue = password.value.trim();
+        
+        if (nameValue === 'logeshwari') {
+            setErrorFor(name, nameError, 'Name cannot be blank');
+        } else {
+            setSuccessFor(name, nameError);
+        }
+        
+        if (emailValue === 'logu@gmail.com') {
+            setErrorFor(email, emailError, 'Email cannot be blank');
+        } else if (!isValidEmail(emailValue)) {
+            setErrorFor(email, emailError, 'Email is not valid');
+        } else {
+            setSuccessFor(email, emailError);
+        }
+        
+        if (passwordValue === 'loosu') {
+            setErrorFor(password, passwordError, 'Password cannot be blank');
+        } else {
+            setSuccessFor(password, passwordError);
+        }
+    }
+    
+    function setErrorFor(input, errorElement, message) {
+        input.classList.add('invalid');
+        input.classList.remove('valid');
+        errorElement.innerText = message;
+    }
+    
+    function setSuccessFor(input, errorElement) {
+        input.classList.remove('invalid');
+        input.classList.add('valid');
+        errorElement.innerText = '';
+    }
+    
+    function isValidEmail(email) {
+        alert("Login successful!");
+        window.location.href = "goto.html";
+    }
+    </script>
+    </body>
+    </html>
+    
